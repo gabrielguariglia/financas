@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Navbar from 'react-bootstrap/Navbar'
 
 function App() {
   const[moeda,setMoeda] = useState('')
@@ -21,11 +23,11 @@ function App() {
 
 
   return (
-    <div>
-          <div> 
-            
-          </div>
-    </div>
+    <>
+          <Navbar bg="warning"> 
+            <Navbar.Brand href="#inicio">FatecFinanças</Navbar.Brand>
+          </Navbar>
+    </>
   );
 }
 
