@@ -35,7 +35,7 @@ function App() {
         <Navbar.Brand href="#inicio"><b>FatecFinanças</b></Navbar.Brand>
       </Navbar>
       <Jumbotron>
-        <h1><b>Fatec Finanças</b></h1>
+        <h1><b>Fatec Finanças<GiMagnifyingGlass/></b></h1>
         <h2>
           Consulta da cotação das principais moedas ao redor do globo.
             </h2>
