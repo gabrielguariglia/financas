@@ -7,6 +7,10 @@ import Card from "react-bootstrap/Card"
 import Button from "react-bootstrap/Button"
 
 
+import { RiMoneyDollarCircleFill, RiMoneyEuroCircleFill } from 'react-icons/ri'
+import { GiMagnifyingGlass } from 'react-icons/gi'
+
+
 function App() {
   const [moeda, setMoeda] = useState('')
 
@@ -28,10 +32,10 @@ function App() {
   return (
     <>
       <Navbar bg="warning">
-        <Navbar.Brand href="#inicio">FatecFinanças</Navbar.Brand>
+        <Navbar.Brand href="#inicio"><b>FatecFinanças</b></Navbar.Brand>
       </Navbar>
       <Jumbotron>
-        <h1> Fatec Finanças</h1>
+        <h1><b>Fatec Finanças</b></h1>
         <h2>
           Consulta da cotação das principais moedas ao redor do globo.
             </h2>
@@ -45,7 +49,7 @@ function App() {
           </Card.Header>
           <Accordion.Collapse eventKey="0">
             <Card.Body>
-              <h6>Dolar : </h6> 
+              <h6><RiMoneyDollarCircleFill color="#000000" size="23" /> Dolar : </h6> 
               <h6>Preço de Compra : </h6>
               <h6>Preço de Venda : </h6>
               <h6>Variação em Porcentagem : </h6>
@@ -55,7 +59,7 @@ function App() {
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="1">
-              Cotação do Euro
+             <RiMoneyEuroCircleFill color="#000000" size="23" /> Cotação do Euro
       </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="1">
