@@ -10,19 +10,17 @@ import Button from "react-bootstrap/Button"
 function App() {
   const [moeda, setMoeda] = useState('')
 
-
   async function obtemMoeda(moeda) {
     let chaveAPI = process.env.REACT_APP_APIKEY
     let url = `https://api.hgbrasil.com/finance?key=${chaveAPI}`
     await fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        setMoeda(data)
-        console.log(data)
-      })
-      .catch(function (error) {
-        console.error(`${error.message}`)
-      })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+    })
+    .catch(function (error){
+      console.error(`Erro ao obter a Moeda: ${error.message}`)
+    })
 
   }
 
@@ -41,12 +39,17 @@ function App() {
       <Accordion defaultActiveKey="0">
         <Card>
           <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="0">
-              Cotação do Dollar
+            <Accordion.Toggle as={Button} variant="link" eventKey="0" moeda="USD" onClick={() => {obtemMoeda(moeda)}}>
+             Clique aqui para ver a cotação do Dolar
       </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="0">
-            <Card.Body>Hello! I'm the body</Card.Body>
+            <Card.Body>
+              <h6>Dolar : </h6> 
+              <h6>Preço de Compra : </h6>
+              <h6>Preço de Venda : </h6>
+              <h6>Variação em Porcentagem : </h6>
+            </Card.Body>
           </Accordion.Collapse>
         </Card>
         <Card>
