@@ -5,26 +5,28 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import Row from 'react-bootstrap/Row'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/Spinner'
+import { GiMagnifyingGlass } from 'react-icons/gi'
 
 
 function App() {
   const [ moeda, setMoeda ] = useState('')
+  const [ valor, setValor ] = useState(null)
+  const [obtendoMoeda, setObtendoMoeda] = useState(false)
 
   async function obtemMoeda(moeda) {
+    setObtendoMoeda(true)
     let chaveAPI = process.env.REACT_APP_APIKEY
     let url = `https://api.hgbrasil.com/finance?array_limit=1&fields=only_results,${moeda}&key=${chaveAPI}`
     await fetch(url)
       .then(response => response.json())
       .then(data => {
-
-        setMoeda(data)
-        console.log(moeda)
-
-
+        setValor(data)
       })
       .catch(function (error) {
        console.error(`Erro ao obter a Moeda: ${error.message}`)
       })
+    setObtendoMoeda(false)
   }
 
 
@@ -41,22 +43,35 @@ function App() {
       </Jumbotron>
       <Row className="justify-content-center">
         <select onChange={event => setMoeda(event.target.value)}>
-          <option value="USD"> Dolar</option>
-          <option value="EUR"> Euro</option>
+          <option value="">  Selecione uma moeda </option>
           <option value="BTC"> Bitcoin </option>
+          <option value="EUR"> Euro</option>
+          <option value="GBP"> Libra Esterlina </option>
+          <option value="USD"> Dólar</option>
+          <option value="ARS"> Peso Argentino</option>
+          <option value="JPY"> Iene  </option>
         </select>
+        {obtendoMoeda &&
+        <Row className="justify-content-center">
+          <Spinner animation="border" variant="primary" />
+        </Row>
+        }
+        {valor &&
         <Card style={{ width: '18rem' }}>
           <Card.Body>
-            <Card.Title>{moeda.name}</Card.Title>
+            <Card.Title>{valor.currencies.name}</Card.Title>
             <Card.Text>
-              Some quick example text to build on the card title and make up the bulk of
-              the card's content.
+            <h6>Valor : {valor.currencies.buy}</h6>
+            <h6>Variação : {valor.currencies.variation}%</h6>
             </Card.Text>
           </Card.Body>
         </Card>
+        }
       </Row>
       <Row className="justify-content-center">
-      <Button onClick={() => {obtemMoeda(moeda)}} >Obter Moeda</Button>
+      <Button onClick={() => obtemMoeda(moeda)}>
+        {obtendoMoeda ? <Spinner size="sm" animation="grow" /> : <GiMagnifyingGlass color="#000000" size="20" />}
+        Obter Moeda</Button>
       </Row>
     </>
   );
