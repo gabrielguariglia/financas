@@ -2,26 +2,29 @@ import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from 'react-bootstrap/Navbar'
 import Jumbotron from 'react-bootstrap/Jumbotron'
-import Accordion from "react-bootstrap/Accordion"
-import Card from "react-bootstrap/Card"
-import Button from "react-bootstrap/Button"
+import Row from 'react-bootstrap/Row'
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 
 
 function App() {
-  const [moeda, setMoeda] = useState('')
+  const [ moeda, setMoeda ] = useState('')
 
   async function obtemMoeda(moeda) {
     let chaveAPI = process.env.REACT_APP_APIKEY
-    let url = `https://api.hgbrasil.com/finance?key=${chaveAPI}`
+    let url = `https://api.hgbrasil.com/finance?array_limit=1&fields=only_results,${moeda}&key=${chaveAPI}`
     await fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-    })
-    .catch(function (error){
-      console.error(`Erro ao obter a Moeda: ${error.message}`)
-    })
+      .then(response => response.json())
+      .then(data => {
 
+        setMoeda(data)
+        console.log(moeda)
+        
+
+      })
+      .catch(function (error) {
+       console.error(`Erro ao obter a Moeda: ${error.message}`)
+      })
   }
 
 
@@ -36,33 +39,25 @@ function App() {
           Consulta da cotação das principais moedas ao redor do globo.
             </h2>
       </Jumbotron>
-      <Accordion defaultActiveKey="0">
-        <Card>
-          <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="0" moeda="USD" onClick={() => {obtemMoeda(moeda)}}>
-             Clique aqui para ver a cotação do Dolar
-      </Accordion.Toggle>
-          </Card.Header>
-          <Accordion.Collapse eventKey="0">
-            <Card.Body>
-              <h6>Dolar : </h6> 
-              <h6>Preço de Compra : </h6>
-              <h6>Preço de Venda : </h6>
-              <h6>Variação em Porcentagem : </h6>
-            </Card.Body>
-          </Accordion.Collapse>
+      <Row className="justify-content-center">
+        <select onChange={event => setMoeda(event.target.value)}>
+          <option value="USD"> Dolar</option>
+          <option value="EUR"> Euro</option>
+          <option value="BTC"> Bitcoin </option>
+        </select>
+        <Card style={{ width: '18rem' }}>
+          <Card.Body>
+            <Card.Title>{moeda.name}</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the bulk of
+              the card's content.
+            </Card.Text>
+          </Card.Body>
         </Card>
-        <Card>
-          <Card.Header>
-            <Accordion.Toggle as={Button} variant="link" eventKey="1">
-              Cotação do Euro
-      </Accordion.Toggle>
-          </Card.Header>
-          <Accordion.Collapse eventKey="1">
-            <Card.Body>Hello! I'm another body</Card.Body>
-          </Accordion.Collapse>
-        </Card>
-      </Accordion>
+      </Row>
+      <Row className="justify-content-center">
+      <Button onClick={() => {obtemMoeda(moeda)}} >Obter Moeda</Button>
+      </Row>
     </>
   );
 }
