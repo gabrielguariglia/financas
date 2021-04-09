@@ -44,12 +44,12 @@ function App() {
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="link" eventKey="0" moeda="USD" onClick={() => {obtemMoeda(moeda)}}>
-             Clique aqui para ver a cotação do Dolar
+            <RiMoneyDollarCircleFill color="#000000" size="23" /> Clique aqui para ver a cotação do Dolar
       </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="0">
             <Card.Body>
-              <h6><RiMoneyDollarCircleFill color="#000000" size="23" /> Dolar : </h6> 
+              <h6>Dolar : </h6> 
               <h6>Preço de Compra : </h6>
               <h6>Preço de Venda : </h6>
               <h6>Variação em Porcentagem : </h6>
