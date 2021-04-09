@@ -10,8 +10,8 @@ import { GiMagnifyingGlass } from 'react-icons/gi'
 
 
 function App() {
-  const [ moeda, setMoeda ] = useState('')
-  const [ valor, setValor ] = useState(null)
+  const [moeda, setMoeda] = useState('')
+  const [valor, setValor] = useState(null)
   const [obtendoMoeda, setObtendoMoeda] = useState(false)
 
   async function obtemMoeda(moeda) {
@@ -24,7 +24,7 @@ function App() {
         setValor(data)
       })
       .catch(function (error) {
-       console.error(`Erro ao obter a Moeda: ${error.message}`)
+        console.error(`Erro ao obter a Moeda: ${error.message}`)
       })
     setObtendoMoeda(false)
   }
@@ -35,14 +35,11 @@ function App() {
       <Navbar bg="warning">
         <Navbar.Brand href="#inicio">FatecFinanças</Navbar.Brand>
       </Navbar>
-      <Jumbotron>
+      <Jumbotron >
         <h1> Fatec Finanças</h1>
-        <h2>
-          Consulta da cotação das principais moedas ao redor do globo.
-            </h2>
+        <h3>Consulta da cotação das principais moedas ao redor do globo.</h3>
       </Jumbotron>
       <Row className="justify-content-center">
-        <div>
         <select onChange={event => setMoeda(event.target.value)}>
           <option value="">  Selecione uma moeda </option>
           <option value="BTC"> Bitcoin </option>
@@ -52,29 +49,31 @@ function App() {
           <option value="ARS"> Peso Argentino</option>
           <option value="JPY"> Iene  </option>
         </select>
-        </div>
-        <div>
-        {obtendoMoeda &&
-        <Row className="justify-content-center">
-          <Spinner animation="border" variant="primary" />
-        </Row>
+          {obtendoMoeda &&
+          <Row className="justify-content-center">
+            <Spinner animation="border" variant="primary" />
+          </Row>
         }
-        </div>
+        
+      </Row>
+      
+      <Row className="justify-content-center">
+        
         {valor &&
-        <Card style={{ width: '18rem' }}>
-          <Card.Body>
-            <Card.Title>{valor.currencies.name}</Card.Title>
-            <Card.Text>
-            <h6>Valor : {valor.currencies.buy}</h6>
-            <h6>Variação : {valor.currencies.variation}%</h6>
-            </Card.Text>
-          </Card.Body>
-        </Card>
+          <Card style={{ width: '18rem' }}>
+            <Card.Body>
+              <Card.Title>{valor.currencies.name}</Card.Title>
+              <Card.Text>
+                <h6>Valor : R${valor.currencies.buy}</h6>
+                <h6>Variação : {valor.currencies.variation}%</h6>
+              </Card.Text>
+            </Card.Body>
+          </Card>
         }
       </Row>
       <Row className="justify-content-center">
-      <Button onClick={() => obtemMoeda(moeda)}>
-        {obtendoMoeda ? <Spinner size="sm" animation="grow" /> : <GiMagnifyingGlass color="#000000" size="20" />}
+        <Button onClick={() => obtemMoeda(moeda)} variant="success">
+          {obtendoMoeda ? <Spinner size="sm" animation="grow" /> : <GiMagnifyingGlass color="#000000" size="20" />}
         Obter Moeda</Button>
       </Row>
     </>
