@@ -19,7 +19,7 @@ function App() {
 
         setMoeda(data)
         console.log(moeda)
-        
+
 
       })
       .catch(function (error) {
@@ -61,5 +61,6 @@ function App() {
     </>
   );
 }
+
 
 export default App;
