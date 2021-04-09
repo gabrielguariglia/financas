@@ -42,6 +42,7 @@ function App() {
             </h2>
       </Jumbotron>
       <Row className="justify-content-center">
+        <div>
         <select onChange={event => setMoeda(event.target.value)}>
           <option value="">  Selecione uma moeda </option>
           <option value="BTC"> Bitcoin </option>
@@ -51,11 +52,14 @@ function App() {
           <option value="ARS"> Peso Argentino</option>
           <option value="JPY"> Iene  </option>
         </select>
+        </div>
+        <div>
         {obtendoMoeda &&
         <Row className="justify-content-center">
           <Spinner animation="border" variant="primary" />
         </Row>
         }
+        </div>
         {valor &&
         <Card style={{ width: '18rem' }}>
           <Card.Body>
