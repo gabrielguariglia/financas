@@ -18,6 +18,12 @@
       "sizes": "512x512"
     }
   ],
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://cors.api.com/api"
+    }
+  ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
