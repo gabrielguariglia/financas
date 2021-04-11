@@ -18,8 +18,7 @@ function App() {
   async function obtemMoeda(moeda) {
     setObtendoMoeda(true)
     let chaveAPI = process.env.REACT_APP_APIKEY
-    let url = `https://api.hgbrasil.com/finance?array_limit=1&fields=only_results,${moeda}&key=${chaveAPI}`
-    header("Access-Control-Allow-Origin: *");
+    let url = `https://thingproxy.freeboard.io/fetch/https://api.hgbrasil.com/finance?array_limit=1&fields=only_results,${moeda}&key=${chaveAPI}`
     await fetch(url)
     
       .then(response => response.json())
@@ -54,11 +53,6 @@ function App() {
           <option value="ARS"> Peso Argentino</option>
           <option value="JPY"> Iene  </option>
         </select>
-          {obtendoMoeda &&
-          <Row className="justify-content-center">
-            <Spinner animation="border" variant="primary" />
-          </Row>
-        }
         
       </Row>
       
