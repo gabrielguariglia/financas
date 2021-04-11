@@ -19,6 +19,7 @@ function App() {
     setObtendoMoeda(true)
     let chaveAPI = process.env.REACT_APP_APIKEY
     let url = `https://api.hgbrasil.com/finance?array_limit=1&fields=only_results,${moeda}&key=${chaveAPI}`
+    header("Access-Control-Allow-Origin: *");
     await fetch(url)
     
       .then(response => response.json())
