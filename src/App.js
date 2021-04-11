@@ -40,6 +40,9 @@ function App() {
       <Jumbotron >
         <h1> Fatec Finanças</h1>
         <h3>Consulta da cotação das principais moedas ao redor do globo.</h3>
+        <h3>Para que a aplicação funcione é nescessario instalar e ativar a extensão moesif origin.</h3>
+        <a href="https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc">clique aqui para instalar a extensão</a>
+        <h3></h3>
       </Jumbotron>
 
        {/* Seleciona a moeda que o usuario queira ver */}
