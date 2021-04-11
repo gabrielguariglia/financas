@@ -14,6 +14,7 @@ function App() {
   const [valor, setValor] = useState(null)
   const [obtendoMoeda, setObtendoMoeda] = useState(false)
 
+  //pegando valores da API
   async function obtemMoeda(moeda) {
     setObtendoMoeda(true)
     let chaveAPI = process.env.REACT_APP_APIKEY
@@ -39,6 +40,8 @@ function App() {
         <h1> Fatec Finanças</h1>
         <h3>Consulta da cotação das principais moedas ao redor do globo.</h3>
       </Jumbotron>
+
+       {/* Seleciona a moeda que o usuario queira ver */}
       <Row className="justify-content-center">
         <select onChange={event => setMoeda(event.target.value)}>
           <option value="">  Selecione uma moeda </option>
@@ -71,6 +74,8 @@ function App() {
           </Card>
         }
       </Row>
+
+      {/* Ative a função que busca os valores na API */}
       <Row className="justify-content-center">
         <Button onClick={() => obtemMoeda(moeda)} variant="success">
           {obtendoMoeda ? <Spinner size="sm" animation="grow" /> : <GiMagnifyingGlass color="#000000" size="20" />}
