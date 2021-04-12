@@ -18,7 +18,7 @@ function App() {
   async function obtemMoeda(moeda) {
     setObtendoMoeda(true)
     let chaveAPI = process.env.REACT_APP_APIKEY
-    let url = `https://api.hgbrasil.com/finance?array_limit=1&fields=only_results,${moeda}&key=${chaveAPI}`
+    let url = `https://api.hgbrasil.com/finance?format=json-cors&array_limit=1&fields=only_results,${moeda}&key=${chaveAPI}`
     await fetch(url)
     
       .then(response => response.json())
@@ -40,9 +40,6 @@ function App() {
       <Jumbotron >
         <h1> Fatec Finanças</h1>
         <h3>Consulta da cotação das principais moedas ao redor do globo.</h3>
-        <h3>Para que a aplicação funcione é nescessario instalar e ativar a extensão moesif origin.</h3>
-        <a href="https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc">clique aqui para instalar a extensão</a>
-        <h3></h3>
       </Jumbotron>
 
        {/* Seleciona a moeda que o usuario queira ver */}
@@ -80,6 +77,7 @@ function App() {
           {obtendoMoeda ? <Spinner size="sm" animation="grow" /> : <GiMagnifyingGlass color="#000000" size="20" />}
         Obter Moeda</Button>
       </Row>
+
     </>
   );
 }
