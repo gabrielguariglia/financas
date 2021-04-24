@@ -144,8 +144,9 @@ function App() {
           {convertendo ? <Spinner size="sm" animation="grow" /> : <GiMagnifyingGlass color="#000000" size="20" />}
           Converter</Button>
       </Row>
-      
+
     </>
+    
   );
 }
 
