@@ -13,6 +13,8 @@ function App() {
   const [moeda, setMoeda] = useState('')
   const [valor, setValor] = useState(null)
   const [obtendoMoeda, setObtendoMoeda] = useState(false)
+  const [valorConversor, setValorConversor] = useState(null)
+  const [convertido, setConvertido] = useState('')
 
   //pegando valores da API
   async function obtemMoeda(moeda) {
@@ -29,6 +31,21 @@ function App() {
         console.error(`Erro ao obter a Moeda: ${error.message}`)
       })
     setObtendoMoeda(false)
+  }
+
+  async function converteMoeda(valorConversor) {
+    let chaveAPI = process.env.REACT_APP_APIKEY
+    let url = `https://api.hgbrasil.com/finance?format=json-cors&array_limit=1&fields=only_results,${valorConversor}&key=${chaveAPI}`
+    await fetch(url)
+    
+      .then(response => response.json())
+      .then(data => {
+        setConvertido(data)
+        console.log(convertido)
+      })
+      .catch(function (error) {
+        console.error(`Erro ao obter a Moeda: ${error.message}`)
+      })
   }
 
 
@@ -77,6 +94,21 @@ function App() {
           {obtendoMoeda ? <Spinner size="sm" animation="grow" /> : <GiMagnifyingGlass color="#000000" size="20" />}
         Obter Moeda</Button>
       </Row>
+
+      <Row className="justify-content-center">
+        <select onChange={event => setValorConversor(event.target.value)}>
+          <option value="">  Selecione uma moeda </option>
+          <option value="BTC"> Bitcoin </option>
+          <option value="EUR"> Euro</option>
+          <option value="GBP"> Libra Esterlina </option>
+          <option value="USD"> Dólar</option>
+          <option value="ARS"> Peso Argentino</option>
+          <option value="JPY"> Iene  </option>
+        </select>
+        <input></input>
+        <Button onClick={() => converteMoeda(valorConversor)} variant="success">Converter</Button>
+      </Row>
+
 
     </>
   );
