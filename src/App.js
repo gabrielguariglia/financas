@@ -16,6 +16,7 @@ function App() {
   const [conversor, setConversor] = useState('')
   const [convertendo, setConvertendo] = useState(false)
 
+  
   //pegando valores da API
   async function obtemMoeda(moeda) {
     setObtendoMoeda(true)
@@ -70,6 +71,9 @@ function App() {
 
       {/* Seleciona a moeda que o usuario queira ver */}
       <Row className="justify-content-center">
+        <h2 class="text-light">Veja a Cotação da moeda escolhida</h2>
+      </Row>
+      <Row className="justify-content-center">
         <select onChange={event => setMoeda(event.target.value)}>
           <option value="">  Selecione uma moeda </option>
           <option value="BTC"> Bitcoin </option>
@@ -79,11 +83,9 @@ function App() {
           <option value="ARS"> Peso Argentino</option>
           <option value="JPY"> Iene  </option>
         </select>
-
       </Row>
 
       <Row className="justify-content-center">
-
         {valor &&
           <Card style={{ width: '18rem' }}>
             <Card.Body>
@@ -106,9 +108,13 @@ function App() {
 
       <Row>
         <br></br>
+        <br></br>
       </Row>
 
         {/* Seleciona a moeda que  */}
+        <Row className="justify-content-center">
+          <h2 class="text-light">Converta o valor que quiser para real</h2>
+        </Row>
       <Row className="justify-content-center">
         <select onChange={event => setConversor(event.target.value)}>
           <option value="">  Selecione uma moeda </option>
@@ -138,8 +144,7 @@ function App() {
           {convertendo ? <Spinner size="sm" animation="grow" /> : <GiMagnifyingGlass color="#000000" size="20" />}
           Converter</Button>
       </Row>
-
-
+      
     </>
   );
 }
