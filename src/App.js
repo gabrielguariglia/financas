@@ -127,13 +127,13 @@ function App() {
         </select>
 
         <Row>
-          <input type="number" id="num"></input>
+          <input type="number" min="0" id="num"></input>
         </Row>
 
           <Card style={{ width: '18rem' }}>
             <Card.Body>
               <Card.Text>
-                R$<input type="number" id="resultado" readOnly />
+                R$<input type="number" step="0.01" id="resultado" readOnly />
               </Card.Text>
             </Card.Body>
           </Card>
